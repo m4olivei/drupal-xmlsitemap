@@ -18,7 +18,7 @@ use Drush\Commands\DrushCommands;
  *   - http://cgit.drupalcode.org/devel/tree/src/Commands/DevelCommands.php
  *   - http://cgit.drupalcode.org/devel/tree/drush.services.yml
  */
-class XmlsitemapCommands extends DrushCommands {
+class XmlSitemapCommands extends DrushCommands {
 
   /**
    * The config.factory service.
@@ -35,7 +35,7 @@ class XmlsitemapCommands extends DrushCommands {
   protected $moduleHandler;
 
   /**
-   * XmlsitemapCommands constructor.
+   * XmlSitemapCommands constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.

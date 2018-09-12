@@ -1,6 +1,6 @@
 services:
   xmlsitemap.commands:
-    class: \Drupal\xmlsitemap\Commands\XmlsitemapCommands
+    class: \Drupal\xmlsitemap\Commands\XmlSitemapCommands
     arguments:
       - '@config.factory'
       - '@module_handler'
