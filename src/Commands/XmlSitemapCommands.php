@@ -4,6 +4,7 @@ namespace Drupal\xmlsitemap\Commands;
 
 use Drupal\Component\Utility\Timer;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drush\Commands\DrushCommands;
 
@@ -35,20 +36,31 @@ class XmlSitemapCommands extends DrushCommands {
   protected $moduleHandler;
 
   /**
+   * Default database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  /**
    * XmlSitemapCommands constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module_handler service.
+   * @param \Drupal\Core\Database\Connection $connection
+   *   Default database connection.
    */
   public function __construct(
     ConfigFactoryInterface $configFactory,
-    ModuleHandlerInterface $moduleHandler
+    ModuleHandlerInterface $moduleHandler,
+    Connection $connection
   ) {
     parent::__construct();
     $this->config = $configFactory->get('xmlsitemap.settings');
     $this->moduleHandler = $moduleHandler;
+    $this->connection = $connection;
   }
 
   /**
@@ -114,11 +126,11 @@ class XmlSitemapCommands extends DrushCommands {
    */
   public function index(array $options = ['limit' => NULL]) {
     $limit = (int) ($options['limit'] ?: $this->config->get('batch_limit'));
-    $count_before = db_select('xmlsitemap', 'x')->countQuery()->execute()->fetchField();
+    $count_before = $this->connection->select('xmlsitemap', 'x')->countQuery()->execute()->fetchField();
 
     $this->moduleHandler->invokeAll('xmlsitemap_index_links', ['limit' => $limit]);
 
-    $count_after = db_select('xmlsitemap', 'x')->countQuery()->execute()->fetchField();
+    $count_after = $this->connection->select('xmlsitemap', 'x')->countQuery()->execute()->fetchField();
 
     if ($count_after == $count_before) {
       $this->output()->writeln(dt('No new XML sitemap links to index.'));
