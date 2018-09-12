@@ -1,0 +1,33 @@
+{
+  "name": "drupal/xmlsitemap",
+  "description": "Creates a sitemap that conforms to the sitemaps.org specification.",
+  "type": "drupal-module",
+  "homepage": "http://drupal.org/project/xmlsitemap",
+  "authors": [
+    {
+      "name": "Dave Reid",
+      "email": "weitzman@tejasa.com",
+      "homepage": "http://www.davereid.net/",
+      "role": "Maintainer"
+    },
+    {
+      "name": "See contributors",
+      "homepage": "https://www.drupal.org/node/190839/committers"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/xmlsitemap?categories=All",
+    "irc": "irc://irc.freenode.org/drupal-contribute",
+    "source": "https://cgit.drupalcode.org/xmlsitemap/log/?h=8.x-1.x"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev",
+  "require": {},
+  "extra": {
+    "drush": {
+      "services": {
+        "drush.services.yml": "^9"
+      }
+    }
+  }
+}
